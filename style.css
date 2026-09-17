@@ -1,0 +1,343 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Poppins", "Segoe UI", sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at 15% 20%, #ff4ecd 0%, transparent 28%),
+        radial-gradient(circle at 85% 15%, #00e5ff 0%, transparent 25%),
+        radial-gradient(circle at 80% 85%, #7c3aed 0%, transparent 30%),
+        linear-gradient(135deg, #09001a, #11002e 50%, #001d2e);
+
+    overflow: hidden;
+    color: white;
+}
+
+
+/* Decorative glowing circles */
+
+body::before {
+    content: "";
+    position: fixed;
+
+    width: 280px;
+    height: 280px;
+
+    background: #ff2fb3;
+    border-radius: 50%;
+
+    filter: blur(110px);
+    opacity: 0.35;
+
+    top: -80px;
+    left: -80px;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+
+    width: 300px;
+    height: 300px;
+
+    background: #00eaff;
+    border-radius: 50%;
+
+    filter: blur(120px);
+    opacity: 0.3;
+
+    bottom: -100px;
+    right: -80px;
+}
+
+
+/* Main Card */
+
+.container {
+    position: relative;
+    z-index: 2;
+
+    width: min(90%, 620px);
+
+    padding: 50px 45px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+
+    animation: cardEntry 0.8s ease;
+}
+
+
+/* Heading */
+
+h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+
+    font-weight: 800;
+
+    margin-bottom: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff5ccd,
+            #ffffff,
+            #00eaff,
+            #a78bfa
+        );
+
+    background-size: 250% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientMove 4s linear infinite;
+}
+
+
+/* Description */
+
+p {
+    color: #d9d5e8;
+
+    font-size: 1rem;
+
+    margin-bottom: 30px;
+
+    line-height: 1.6;
+}
+
+
+/* Input */
+
+#topic {
+    width: 100%;
+
+    padding: 16px 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius: 15px;
+
+    outline: none;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    color: white;
+
+    font-size: 1rem;
+
+    transition: 0.3s ease;
+
+    margin-bottom: 18px;
+}
+
+
+#topic::placeholder {
+    color: #aaa5bd;
+}
+
+
+#topic:focus {
+    border-color: #00eaff;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 234, 255, 0.1),
+        0 0 25px rgba(0, 234, 255, 0.2);
+
+    transform: translateY(-2px);
+}
+
+
+/* Button */
+
+#factButton {
+    width: 100%;
+
+    padding: 16px 25px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff36c7,
+            #8b5cf6,
+            #00c6ff
+        );
+
+    background-size: 200% 200%;
+
+    box-shadow:
+        0 10px 30px rgba(255, 54, 199, 0.25);
+
+    transition: all 0.3s ease;
+
+    animation: buttonGradient 5s ease infinite;
+}
+
+
+#factButton:hover {
+    transform: translateY(-4px) scale(1.02);
+
+    box-shadow:
+        0 15px 40px rgba(0, 234, 255, 0.3),
+        0 0 25px rgba(255, 54, 199, 0.2);
+}
+
+
+#factButton:active {
+    transform: scale(0.97);
+}
+
+
+/* Result Box */
+
+#result {
+    margin-top: 28px;
+
+    min-height: 120px;
+
+    padding: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 54, 199, 0.08),
+            rgba(0, 234, 255, 0.08)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    color: #f5f3ff;
+
+    font-size: 1.05rem;
+
+    line-height: 1.7;
+
+    box-shadow:
+        inset 0 0 25px rgba(255, 255, 255, 0.025);
+
+    transition: 0.4s ease;
+}
+
+
+#result:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(0, 234, 255, 0.4);
+
+    box-shadow:
+        0 10px 30px rgba(0, 234, 255, 0.08);
+}
+
+
+/* Card Animation */
+
+@keyframes cardEntry {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* Heading Gradient Animation */
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: 250% center;
+    }
+}
+
+
+/* Button Animation */
+
+@keyframes buttonGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* Mobile Responsive */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 35px 22px;
+        border-radius: 24px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    #topic,
+    #factButton {
+        padding: 14px 16px;
+    }
+
+    #result {
+        font-size: 0.95rem;
+        padding: 20px;
+    }
+}
